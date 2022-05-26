@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment #componenta de tip deployment
+metadata: 
+  name: nginx-deployment
+  labels: 
+    app: nginx # app e label si se numeste nginx
+spec: #specifications
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata: 
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: appsec
+        ports:
+        - containerPort: 5000 #exposed de pe container
+--- #adaugam o noua componenta
+apiVersion: v1
+kind: Service
+metadata: 
+  name: nginx-service
+spec:
+  type: NodePort
+  selector: #cui va servi serviciul
+    app: nginx 
+  ports: 
+    - port: 80 #port folosit ca sa ne conectam
+      targetPort: 5000 # port expus pe container

