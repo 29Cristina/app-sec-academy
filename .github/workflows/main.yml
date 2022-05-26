@@ -28,8 +28,9 @@ jobs:
       - name: Install dependancies
         run: pip install -r requirements.txt
         
+      - name: Build Docker image
+        run: docker build . --file Dockerfile --tag app:latest 
+        
       - name: Run flask
         run: flask run &
         
-      - name: Build Docker image
-        run: docker build . --file Dockerfile --tag app:latest 
