@@ -30,3 +30,6 @@ jobs:
         
       - name: Run flask
         run: flask run &
+        
+      - name: Build Docker image
+        run: docker build . --file Dockerfile --tag app:latest 
